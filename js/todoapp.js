@@ -1,0 +1,171 @@
+const demoTodo = [
+  {
+    name: "Follow Jijuzo on GitHub",
+    id: 1,
+    completed: false,
+  },
+];
+
+//**Todo creation**
+const todos = document.querySelector(".todo-ul");
+function addingTodo(todo) {
+  const newTodo = document.createElement("li");
+  newTodo.className = "mycheck";
+  newTodo.setAttribute("completed", todo.completed);
+  newTodo.innerHTML = `
+            <input id="${todo.id}" type="checkbox" class="check">
+            <label class="task-label" for="${todo.id}">${todo.name}</label>
+            <i class="fa-solid fa-trash-can completed-trash"></i>
+    `;
+  todos.appendChild(newTodo);
+}
+
+// **using demo todo**
+let tasks = JSON.parse(localStorage.getItem("tasks")) || demoTodo;
+function displayTodos() {
+  for (let task of tasks) {
+    addingTodo(task);
+  }
+}
+
+displayTodos();
+
+// **Creating and adding todo**
+const input = document.querySelector(".task-input");
+const addButton = document.querySelector(".add-button");
+addButton.addEventListener("click", () => {
+  if (input.value) {
+    const randomID = Math.random();
+    const userInput = {
+      name: input.value,
+      id: randomID,
+      completed: false,
+    };
+
+    tasks.push(userInput);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    addingTodo(userInput);
+    input.value = "";
+
+    allCheckBoxes = document.querySelectorAll(".check");
+    completeTodo();
+  }
+});
+
+//**Todo completing**
+let allCheckBoxes = document.querySelectorAll(".check");
+function completeTodo() {
+  for (let checkbox of allCheckBoxes) {
+    const currentTodo = checkbox.parentElement;
+    const label = currentTodo.children[1];
+    if (currentTodo.getAttribute("completed") === "true") {
+      checkbox.checked = true;
+      label.style.textDecoration = "line-through";
+    } else {
+      checkbox.checked = false;
+    }
+
+    checkbox.addEventListener("click", () => {
+      const currentTodoId = +currentTodo.firstElementChild.id;
+      currentTodo.setAttribute("completed", checkbox.checked);
+      checkbox.checked
+        ? (label.style.textDecoration = "line-through")
+        : (label.style.textDecoration = "none");
+
+      for (let task of tasks) {
+        if (task.id === currentTodoId) {
+          task.completed = checkbox.checked;
+        }
+      }
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    });
+  }
+}
+
+completeTodo();
+
+//**Switching between tabs**
+const showAll = document.querySelector("#all-button"); //  All button
+const showActive = document.querySelector("#active-button"); // Active button
+const showCompleted = document.querySelector("#completed-button"); // Completed button
+let allTodos = document.querySelectorAll(".mycheck");
+let trashCans = document.querySelectorAll(".completed-trash");
+const filterBtnContainer = document.querySelectorAll(".tab-links"); // filter button wrapper
+const taskAddingDiv = document.querySelector(".task-adding");
+const deleteCompletedDiv = document.querySelector(".delete-completed");
+
+showAll.addEventListener("click", () => {
+  allTodos = document.querySelectorAll(".mycheck");
+  trashCans = document.querySelectorAll(".completed-trash");
+  trashCans.forEach((e) => (e.style.opacity = "0"));
+  deleteCompletedDiv.style.display = "none";
+  taskAddingDiv.style.display = "flex";
+  for (let todo of allTodos) {
+    todo.style.display = "block";
+  }
+});
+
+showActive.addEventListener("click", () => {
+  allTodos = document.querySelectorAll(".mycheck");
+  trashCans = document.querySelectorAll(".completed-trash");
+  trashCans.forEach((e) => (e.style.opacity = "0"));
+  deleteCompletedDiv.style.display = "none";
+  taskAddingDiv.style.display = "flex";
+  for (let todo of allTodos) {
+    todo.getAttribute("completed") === "true"
+      ? (todo.style.display = "none")
+      : (todo.style.display = "block");
+  }
+});
+
+showCompleted.addEventListener("click", () => {
+  allTodos = document.querySelectorAll(".mycheck");
+  trashCans = document.querySelectorAll(".completed-trash");
+  trashCans.forEach((e) => (e.style.opacity = "1"));
+  deleteCompletedDiv.style.display = "flex";
+  taskAddingDiv.style.display = "none";
+  for (let todo of allTodos) {
+    todo.getAttribute("completed") === "true"
+      ? (todo.style.display = "block")
+      : (todo.style.display = "none");
+  }
+  completeTodo();
+});
+
+//**Deleting todos**
+todos.addEventListener("click", (e) => {
+  if (e.target.classList.contains("completed-trash")) {
+    const currentTodo = e.target.parentElement;
+    todos.removeChild(currentTodo);
+
+    const todoIndex = tasks.findIndex(
+      (task) => task.id === +currentTodo.firstElementChild.id
+    );
+    tasks.splice(todoIndex, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+});
+
+//**Delete completed todos**
+deleteCompletedDiv.addEventListener("click", () => {
+  allTodos = document.querySelectorAll(".mycheck");
+  allTodos.forEach((todo) => {
+    if (todo.getAttribute("completed") === "true") {
+      todos.removeChild(todo);
+    }
+  });
+  tasks = tasks.filter((task) => task.completed === false);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+});
+
+//**Active tab indicator**
+const tabs = document.querySelectorAll(".nav-section");
+tabs.forEach((link) => {
+  link.addEventListener("click", () => {
+    tabs.forEach((link) => {
+      link.classList.remove("active");
+    });
+    link.classList.add("active");
+  });
+});
