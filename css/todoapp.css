@@ -2,6 +2,7 @@
   --font-family-default: "Montserrat";
   --font-size-default: 14px;
   --font-weight-default: 500;
+  --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
   --color-blue: #2f80ed;
   --color-light-gray: #bdbdbd;
@@ -17,7 +18,6 @@
 
 .header-content {
   font-family: "Raleway";
-  font-style: normal;
   font-weight: var(--font-weight-bold);
   font-size: 36px;
   line-height: 42px;
@@ -37,17 +37,16 @@
 
 .tab {
   font-family: var(--font-family-default);
-  font-style: normal;
-  font-weight: 600;
+  font-weight: var(--font-weight-semi-bold);
   font-size: var(--font-size-default);
   border: none;
+  padding-bottom: 10px;
   cursor: pointer;
   color: #333333;
   background-color: var(--color-white);
 }
 
 .active {
-  padding-bottom: 10px;
   border-bottom: 2px solid var(--color-blue);
 }
 
@@ -67,7 +66,6 @@
 
 .task-input::placeholder {
   font-family: var(--font-family-default);
-  font-style: normal;
   font-weight: 400;
   font-size: var(--font-size-default);
   line-height: 17px;
@@ -106,7 +104,6 @@
 
 .todo-ul-item {
   font-family: var(--font-family-default);
-  font-style: normal;
   font-weight: var(--font-weight-default);
   font-size: 18px;
   line-height: 22px;
@@ -143,8 +140,7 @@
 
 .delete-completed-content {
   font-family: var(--font-family-default);
-  font-style: normal;
-  font-weight: 600;
+  font-weight: var(--font-weight-semi-bold);
   font-size: 12px;
   display: inline-block;
   color: var(--color-white);
