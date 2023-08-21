@@ -4,6 +4,9 @@
   --font-weight-default: 500;
   --font-weight-bold: 700;
   --color-blue: #2f80ed;
+  --color-light-gray: #bdbdbd;
+  --color-gray: #b9bdcf;
+  --color-white: #ffffff;
 }
 
 .page {
@@ -29,7 +32,7 @@
   justify-content: space-around;
   list-style-type: none;
   margin: 30px 0px 15px 0px;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid var(--color-light-gray);
 }
 
 .tab {
@@ -40,7 +43,7 @@
   border: none;
   cursor: pointer;
   color: #333333;
-  background-color: #ffffff;
+  background-color: var(--color-white);
 }
 
 .active {
@@ -57,7 +60,7 @@
 
 .task-input {
   flex-basis: 70%;
-  border: 1px solid #bdbdbd;
+  border: 1px solid var(--color-light-gray);
   border-radius: 12px;
   padding: 10px;
 }
@@ -76,7 +79,7 @@
   border: 1px solid var(--color-blue);
   border-radius: 12px;
   cursor: pointer;
-  color: white;
+  color: var(--color-white);
   background: #2f80ed;
 }
 
@@ -89,6 +92,16 @@
   list-style-type: none;
   margin-top: 30px;
   padding: 0;
+}
+
+.completed-trash {
+  color: var(--color-light-gray);
+  background-color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  visibility: hidden;
+  right: 0px;
 }
 
 .todo-ul-item {
@@ -106,14 +119,6 @@
 
 .task-label {
   cursor: pointer;
-}
-
-.completed-trash {
-  color: #bdbdbd;
-  cursor: pointer;
-  position: absolute;
-  opacity: 0;
-  right: 0px;
 }
 
 .delete-completed {
@@ -142,7 +147,7 @@
   font-weight: 600;
   font-size: 12px;
   display: inline-block;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 footer {
@@ -153,13 +158,13 @@ footer {
   font-size: var(--font-size-default);
   font-weight: var(--font-weight-default);
   text-align: center;
-  color: #b9bdcf;
+  color: var(--color-gray);
   margin-bottom: 25px;
 }
 
 .link {
   font-weight: var(--font-weight-bold);
-  color: #b9bdcf;
+  color: var(--color-gray);
 }
 
 @media (max-width: 500px) {
