@@ -24,7 +24,7 @@ function addTodo(todo) {
 }
 
 // **using demo todo**
-let tasks = JSON.parse(localStorage.getItem("tasks")) || demoTodo;
+let tasks = JSON.parse(localStorage.getItem("tasks")) ?? demoTodo;
 function displayTodos() {
   for (let task of tasks) {
     addTodo(task);
