@@ -12,7 +12,7 @@ todos.className = "todo-ul";
 function addTodo(todo) {
   const todosDiv = document.querySelector("#tab1");
   const newTodo = document.createElement("li");
-  newTodo.className = "mycheck";
+  newTodo.className = "todo-ul-item";
   newTodo.setAttribute("completed", todo.completed);
   newTodo.innerHTML = `
             <input id="${todo.id}" type="checkbox" class="check">
@@ -70,7 +70,7 @@ function completeTodo() {
     }
 
     checkbox.addEventListener("click", () => {
-      const currentTodoId = +currentTodo.firstElementChild.id;
+      const currentTodoId = Number(currentTodo.firstElementChild.id);
       currentTodo.setAttribute("completed", checkbox.checked);
       checkbox.checked
         ? (label.style.textDecoration = "line-through")
@@ -89,17 +89,17 @@ function completeTodo() {
 completeTodo();
 
 //**Switching between tabs**
-const showAll = document.querySelector("#all-button"); //  All button
-const showActive = document.querySelector("#active-button"); // Active button
-const showCompleted = document.querySelector("#completed-button"); // Completed button
-let allTodos = document.querySelectorAll(".mycheck");
+const showAll = document.querySelector("#all-button");
+const showActive = document.querySelector("#active-button");
+const showCompleted = document.querySelector("#completed-button");
+let allTodos = document.querySelectorAll(".todo-ul-item");
 let trashCans = document.querySelectorAll(".completed-trash");
-const filterBtnContainer = document.querySelectorAll(".tab-links"); // filter button wrapper
+const filterBtnContainer = document.querySelectorAll(".tab-links");
 const taskAddDiv = document.querySelector(".task-adding");
 const deleteCompletedDiv = document.querySelector(".delete-completed");
 
 showAll.addEventListener("click", () => {
-  allTodos = document.querySelectorAll(".mycheck");
+  allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "0"));
   deleteCompletedDiv.style.display = "none";
@@ -110,28 +110,26 @@ showAll.addEventListener("click", () => {
 });
 
 showActive.addEventListener("click", () => {
-  allTodos = document.querySelectorAll(".mycheck");
+  allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "0"));
   deleteCompletedDiv.style.display = "none";
   taskAddDiv.style.display = "flex";
   for (let todo of allTodos) {
-    todo.getAttribute("completed") === "true"
-      ? (todo.style.display = "none")
-      : (todo.style.display = "block");
+    todo.style.display =
+      todo.getAttribute("completed") === "true" ? "block" : "none";
   }
 });
 
 showCompleted.addEventListener("click", () => {
-  allTodos = document.querySelectorAll(".mycheck");
+  allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "1"));
   deleteCompletedDiv.style.display = "flex";
   taskAddDiv.style.display = "none";
   for (let todo of allTodos) {
-    todo.getAttribute("completed") === "true"
-      ? (todo.style.display = "block")
-      : (todo.style.display = "none");
+    todo.style.display =
+      todo.getAttribute("completed") === "true" ? "block" : "none";
   }
   completeTodo();
 });
@@ -152,7 +150,7 @@ todos.addEventListener("click", (e) => {
 
 //**Delete completed todos**
 deleteCompletedDiv.addEventListener("click", () => {
-  allTodos = document.querySelectorAll(".mycheck");
+  allTodos = document.querySelectorAll(".todo-ul-item");
   allTodos.forEach((todo) => {
     if (todo.getAttribute("completed") === "true") {
       todos.removeChild(todo);
