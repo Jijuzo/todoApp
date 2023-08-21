@@ -1,3 +1,17 @@
+const storage = {
+  get: function (key, defaultValue) {
+    let value = JSON.parse(localStorage.getItem(key));
+    return value || defaultValue;
+  },
+
+  set: function (key, value) {
+    if (typeof value === "object") {
+      value = JSON.stringify(value);
+    }
+    localStorage.setItem(key, value);
+  },
+};
+
 const demoTodo = [
   {
     name: "Follow Jijuzo on GitHub",
@@ -17,14 +31,16 @@ function addTodo(todo) {
   newTodo.innerHTML = `
             <input id="${todo.id}" type="checkbox" class="check">
             <label class="task-label" for="${todo.id}">${todo.name}</label>
-            <i class="fa-solid fa-trash-can completed-trash"></i>
+            <button class="completed-trash">
+            <i class="fa-solid fa-trash-can"></i>
+            </button>
     `;
   todos.appendChild(newTodo);
   todosDiv.appendChild(todos);
 }
 
 // **using demo todo**
-let tasks = JSON.parse(localStorage.getItem("tasks")) ?? demoTodo;
+let tasks = storage.get("tasks") ?? demoTodo;
 function displayTodos() {
   for (let task of tasks) {
     addTodo(task);
@@ -46,7 +62,8 @@ addButton.addEventListener("click", () => {
     };
 
     tasks.push(userInput);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    storage.set("tasks", tasks);
+    // localStorage.setItem("tasks", JSON.stringify(tasks));
 
     addTodo(userInput);
     input.value = "";
@@ -81,7 +98,7 @@ function completeTodo() {
           task.completed = checkbox.checked;
         }
       }
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+      storage.set("tasks", tasks);
     });
   }
 }
@@ -101,30 +118,30 @@ const deleteCompletedDiv = document.querySelector(".delete-completed");
 showAll.addEventListener("click", () => {
   allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
-  trashCans.forEach((e) => (e.style.opacity = "0"));
+  trashCans.forEach((e) => (e.style.visibility = "hidden"));
   deleteCompletedDiv.style.display = "none";
   taskAddDiv.style.display = "flex";
   for (let todo of allTodos) {
     todo.style.display = "block";
   }
 });
-
+31;
 showActive.addEventListener("click", () => {
   allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
-  trashCans.forEach((e) => (e.style.opacity = "0"));
+  trashCans.forEach((e) => (e.style.visibility = "hidden"));
   deleteCompletedDiv.style.display = "none";
   taskAddDiv.style.display = "flex";
   for (let todo of allTodos) {
     todo.style.display =
-      todo.getAttribute("completed") === "true" ? "block" : "none";
+      todo.getAttribute("completed") === "true" ? "none" : "block";
   }
 });
 
 showCompleted.addEventListener("click", () => {
   allTodos = document.querySelectorAll(".todo-ul-item");
   trashCans = document.querySelectorAll(".completed-trash");
-  trashCans.forEach((e) => (e.style.opacity = "1"));
+  trashCans.forEach((e) => (e.style.visibility = "visible"));
   deleteCompletedDiv.style.display = "flex";
   taskAddDiv.style.display = "none";
   for (let todo of allTodos) {
@@ -136,15 +153,16 @@ showCompleted.addEventListener("click", () => {
 
 //**Deleting todos**
 todos.addEventListener("click", (e) => {
-  if (e.target.classList.contains("completed-trash")) {
-    const currentTodo = e.target.parentElement;
+  if (e.target.classList.contains("fa-trash-can")) {
+    const currentTodo = e.target.parentElement.parentElement;
     todos.removeChild(currentTodo);
 
     const todoIndex = tasks.findIndex(
-      (task) => task.id === +currentTodo.firstElementChild.id
+      (task) => task.id === Number(currentTodo.firstElementChild.id)
     );
+
     tasks.splice(todoIndex, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    storage.set("tasks", tasks);
   }
 });
 
@@ -157,7 +175,7 @@ deleteCompletedDiv.addEventListener("click", () => {
     }
   });
   tasks = tasks.filter((task) => task.completed === false);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  storage.set("tasks", tasks);
 });
 
 //**Active tab indicator**
