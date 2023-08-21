@@ -7,8 +7,10 @@ const demoTodo = [
 ];
 
 //**Todo creation**
-const todos = document.querySelector(".todo-ul");
-function addingTodo(todo) {
+const todos = document.createElement("ul");
+todos.className = "todo-ul";
+function addTodo(todo) {
+  const todosDiv = document.querySelector("#tab1");
   const newTodo = document.createElement("li");
   newTodo.className = "mycheck";
   newTodo.setAttribute("completed", todo.completed);
@@ -18,13 +20,14 @@ function addingTodo(todo) {
             <i class="fa-solid fa-trash-can completed-trash"></i>
     `;
   todos.appendChild(newTodo);
+  todosDiv.appendChild(todos);
 }
 
 // **using demo todo**
 let tasks = JSON.parse(localStorage.getItem("tasks")) || demoTodo;
 function displayTodos() {
   for (let task of tasks) {
-    addingTodo(task);
+    addTodo(task);
   }
 }
 
@@ -45,7 +48,7 @@ addButton.addEventListener("click", () => {
     tasks.push(userInput);
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    addingTodo(userInput);
+    addTodo(userInput);
     input.value = "";
 
     allCheckBoxes = document.querySelectorAll(".check");
@@ -92,7 +95,7 @@ const showCompleted = document.querySelector("#completed-button"); // Completed 
 let allTodos = document.querySelectorAll(".mycheck");
 let trashCans = document.querySelectorAll(".completed-trash");
 const filterBtnContainer = document.querySelectorAll(".tab-links"); // filter button wrapper
-const taskAddingDiv = document.querySelector(".task-adding");
+const taskAddDiv = document.querySelector(".task-adding");
 const deleteCompletedDiv = document.querySelector(".delete-completed");
 
 showAll.addEventListener("click", () => {
@@ -100,7 +103,7 @@ showAll.addEventListener("click", () => {
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "0"));
   deleteCompletedDiv.style.display = "none";
-  taskAddingDiv.style.display = "flex";
+  taskAddDiv.style.display = "flex";
   for (let todo of allTodos) {
     todo.style.display = "block";
   }
@@ -111,7 +114,7 @@ showActive.addEventListener("click", () => {
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "0"));
   deleteCompletedDiv.style.display = "none";
-  taskAddingDiv.style.display = "flex";
+  taskAddDiv.style.display = "flex";
   for (let todo of allTodos) {
     todo.getAttribute("completed") === "true"
       ? (todo.style.display = "none")
@@ -124,7 +127,7 @@ showCompleted.addEventListener("click", () => {
   trashCans = document.querySelectorAll(".completed-trash");
   trashCans.forEach((e) => (e.style.opacity = "1"));
   deleteCompletedDiv.style.display = "flex";
-  taskAddingDiv.style.display = "none";
+  taskAddDiv.style.display = "none";
   for (let todo of allTodos) {
     todo.getAttribute("completed") === "true"
       ? (todo.style.display = "block")
