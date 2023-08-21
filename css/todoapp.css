@@ -100,7 +100,7 @@
   position: relative;
 }
 
-.mycheck:not(:last-child) {
+.todo-ul-item:not(:last-child) {
   margin-bottom: 10px;
 }
 
