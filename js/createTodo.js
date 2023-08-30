@@ -1,5 +1,4 @@
 import { storage } from "./storage.js";
-import { initializeTodos } from "./initializeTodos.js";
 import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 
@@ -21,8 +20,6 @@ function createTodo() {
 
       addTodo(userInput);
       input.value = "";
-
-      initializeTodos();
     }
   });
 }
