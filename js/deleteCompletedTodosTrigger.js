@@ -22,7 +22,6 @@ export function deleteCompletedTodosTrigger() {
         tasks.splice(i, 1);
       }
     }
-    // tasks = tasks.filter((task) => task.completed === false);
     storage.set("tasks", tasks);
   });
 }
