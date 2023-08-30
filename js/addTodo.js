@@ -1,13 +1,15 @@
 import { todos } from "./todoapp.js";
 
-export function addTodo(todo) {
+function addTodo(todo) {
   const todosDiv = document.querySelector("#tab1");
   const newTodo = document.createElement("li");
   newTodo.className = "todo-ul-item";
-  newTodo.setAttribute("data-completed", todo.completed);
+  // newTodo.setAttribute("data-completed", todo.completed);
+  newTodo.id = todo.id;
   newTodo.innerHTML = `
-            <input id="${todo.id}" type="checkbox" class="check">
-            <label class="task-label" for="${todo.id}">${todo.name}</label>
+            <label class="task-label">
+            <input type="checkbox" class="check"> ${todo.name}
+            </label>
             <button class="completed-trash">
             <i class="fa-solid fa-trash-can"></i>
             </button>
@@ -16,4 +18,4 @@ export function addTodo(todo) {
   todosDiv.appendChild(todos);
 }
 
-export default addTodo;
+export { addTodo };
