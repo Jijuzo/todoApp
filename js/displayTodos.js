@@ -1,4 +1,4 @@
-import addTodo from "./addTodo.js";
+import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 
 function displayTodos() {
@@ -7,4 +7,4 @@ function displayTodos() {
   }
 }
 
-export default displayTodos;
+export { displayTodos };
