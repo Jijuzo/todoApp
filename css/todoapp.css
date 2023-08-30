@@ -4,10 +4,15 @@
   --font-weight-default: 500;
   --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
+  --color-red: #eb5757;
+  --color-light-red: #f16a6a;
   --color-blue: #2f80ed;
-  --color-light-gray: #bdbdbd;
+  --color-light-blue: #679bdf;
+  --color-dark-gray: #828282;
   --color-gray: #b9bdcf;
+  --color-light-gray: #bdbdbd;
   --color-white: #ffffff;
+  --color-black: #333333;
 }
 
 .page {
@@ -23,7 +28,7 @@
   line-height: 42px;
   text-align: center;
   letter-spacing: -0.045em;
-  color: #333333;
+  color: var(--color-black);
 }
 
 .tab-links {
@@ -42,7 +47,7 @@
   border: none;
   padding-bottom: 10px;
   cursor: pointer;
-  color: #333333;
+  color: var(--color-black);
   background-color: var(--color-white);
 }
 
@@ -69,7 +74,7 @@
   font-weight: 400;
   font-size: var(--font-size-default);
   line-height: 17px;
-  color: #828282;
+  color: var(--color-dark-gray);
 }
 
 .add-button {
@@ -78,11 +83,11 @@
   border-radius: 12px;
   cursor: pointer;
   color: var(--color-white);
-  background: #2f80ed;
+  background: var(--color-blue);
 }
 
 .add-button:hover {
-  background: #679bdf;
+  background: var(--color-light-blue);
 }
 
 .todo-ul {
@@ -128,14 +133,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #eb5757;
+  background-color: var(--color-red);
   cursor: pointer;
   display: none;
   margin-top: 15px;
 }
 
 .delete-completed:hover {
-  background-color: #f16a6a;
+  background-color: var(--color-light-red);
 }
 
 .delete-completed-content {
