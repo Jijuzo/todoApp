@@ -1,4 +1,4 @@
-import storage from "./storage.js";
+import { storage } from "./storage.js";
 import { todos, tasks } from "./todoapp.js";
 
 function deleteSingleTodo() {
@@ -8,7 +8,7 @@ function deleteSingleTodo() {
       todos.removeChild(currentTodo);
 
       const todoIndex = tasks.findIndex(
-        (task) => task.id === Number(currentTodo.firstElementChild.id)
+        (task) => task.id === Number(currentTodo.id)
       );
 
       tasks.splice(todoIndex, 1);
@@ -17,4 +17,4 @@ function deleteSingleTodo() {
   });
 }
 
-export default deleteSingleTodo;
+export { deleteSingleTodo };
