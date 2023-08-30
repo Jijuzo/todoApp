@@ -6,4 +6,4 @@ const demoTodo = [
   },
 ];
 
-export default demoTodo;
+export { demoTodo };
