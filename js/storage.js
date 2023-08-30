@@ -1,7 +1,7 @@
 const storage = {
   get: function (key, defaultValue) {
     let value = JSON.parse(localStorage.getItem(key));
-    return value || defaultValue;
+    return value ?? defaultValue;
   },
 
   set: function (key, value) {
@@ -12,4 +12,4 @@ const storage = {
   },
 };
 
-export default storage;
+export { storage };
