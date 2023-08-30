@@ -1,6 +1,6 @@
-import storage from "./storage.js";
-import completeTodo from "./completeTodo.js";
-import addTodo from "./addTodo.js";
+import { storage } from "./storage.js";
+import { initializeTodos } from "./initializeTodos.js";
+import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 
 // **Creating and adding todo**
@@ -22,9 +22,9 @@ function createTodo() {
       addTodo(userInput);
       input.value = "";
 
-      completeTodo();
+      initializeTodos();
     }
   });
 }
 
-export default createTodo;
+export { createTodo };
