@@ -1,54 +1,77 @@
-import { allTodos, deleteCompletedDiv } from "./todoapp.js";
-import completeTodo from "./completeTodo.js";
+import { tasks } from "./todoapp.js";
+import { initializeTodos } from "./initializeTodos.js";
+import { todosReassignment } from "./todosReassignment.js";
+import { deleteCompletedButton } from "./deleteCompletedTodosTrigger.js";
 
 const showAll = document.querySelector("#all-button");
 const showActive = document.querySelector("#active-button");
 const showCompleted = document.querySelector("#completed-button");
+const taskAddButton = document.querySelector(".task-adding");
 
-export default function activeTab() {
+function setActiveTab() {
   const tabs = document.querySelectorAll(".nav-section");
-  tabs.forEach((link) => {
-    link.addEventListener("click", () => {
-      tabs.forEach((link) => {
-        link.classList.remove("active");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
       });
-      link.classList.add("active");
+      tab.classList.add("active");
     });
   });
 }
 
-function todosVisibility(
-  visibility,
-  display1,
-  display2,
-  isShowAll,
-  isShowActive
+function toggleTodosVisibility(
+  trashCansVisibility,
+  deleteCompletedButtonDisplay,
+  taskAddButtonDisplay
 ) {
   let trashCans = document.querySelectorAll(".completed-trash");
-  const taskAddDiv = document.querySelector(".task-adding");
-  trashCans.forEach((e) => (e.style.visibility = visibility));
-  deleteCompletedDiv.style.display = display1;
-  taskAddDiv.style.display = display2;
-  for (let todo of allTodos) {
-    if (isShowAll) {
-      todo.style.display = "block";
-    } else if (isShowActive) {
-      todo.style.display = todo.dataset.completed === "true" ? "none" : "block";
-    } else {
-      todo.style.display = todo.dataset.completed === "true" ? "block" : "none";
-    }
-  }
+  trashCans.forEach((e) => (e.style.visibility = trashCansVisibility));
+  deleteCompletedButton.style.display = deleteCompletedButtonDisplay;
+  taskAddButton.style.display = taskAddButtonDisplay;
 }
 
-showAll.addEventListener("click", () => {
-  todosVisibility("hidden", "none", "flex", true, false);
-});
-31;
-showActive.addEventListener("click", () => {
-  todosVisibility("hidden", "none", "flex", false, true);
-});
+function updateTodoDisplay(todo, displayValue) {
+  todo.style.display = displayValue;
+}
 
-showCompleted.addEventListener("click", () => {
-  todosVisibility("visible", "flex", "none", false, false);
-  completeTodo();
-});
+function showAllTodos() {
+  toggleTodosVisibility("hidden", "none", "flex");
+  const todos = todosReassignment()[0];
+  todos.forEach((todo) => {
+    updateTodoDisplay(todo, "block");
+  });
+}
+
+function showActiveTodos() {
+  toggleTodosVisibility("hidden", "none", "flex");
+  const todos = todosReassignment()[0];
+  todos.forEach((todo) => {
+    const currentTodoId = Number(todo.id);
+    tasks.forEach((task) => {
+      if (currentTodoId === task.id) {
+        updateTodoDisplay(todo, task.completed ? "none" : "block");
+      }
+    });
+  });
+}
+
+function showCompletedTodos() {
+  toggleTodosVisibility("visible", "flex", "none");
+  initializeTodos();
+  const todos = todosReassignment()[0];
+  todos.forEach((todo) => {
+    const currentTodoId = Number(todo.id);
+    tasks.forEach((task) => {
+      if (currentTodoId === task.id) {
+        updateTodoDisplay(todo, task.completed ? "block" : "none");
+      }
+    });
+  });
+}
+
+showAll.addEventListener("click", showAllTodos);
+showActive.addEventListener("click", showActiveTodos);
+showCompleted.addEventListener("click", showCompletedTodos);
+
+export { setActiveTab };
