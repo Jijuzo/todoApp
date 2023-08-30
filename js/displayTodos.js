@@ -2,9 +2,9 @@ import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 
 function displayTodos() {
-  for (let task of tasks) {
+  tasks.forEach((task) => {
     addTodo(task);
-  }
+  });
 }
 
 export { displayTodos };
