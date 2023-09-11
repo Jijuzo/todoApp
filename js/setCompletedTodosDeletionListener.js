@@ -1,13 +1,13 @@
 import { tasks, todos } from "./todoapp.js";
-import { todosReassignment } from "./todosReassignment.js";
+import { reassignTodos } from "./reassignTodos.js";
 import { storage } from "./storage.js";
 
 export const deleteCompletedButton =
   document.querySelector(".delete-completed");
 
-export function deleteCompletedTodosTrigger() {
+export function setCompletedTodosDeletionListener() {
   deleteCompletedButton.addEventListener("click", () => {
-    const allTodos = todosReassignment()[0];
+    const allTodos = reassignTodos()[0];
     allTodos.forEach((todo) => {
       const currentTodoId = Number(todo.id);
       tasks.forEach((task) => {
