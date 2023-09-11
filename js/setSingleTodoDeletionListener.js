@@ -1,7 +1,7 @@
 import { storage } from "./storage.js";
 import { todos, tasks } from "./todoapp.js";
 
-function deleteSingleTodoTrigger() {
+function setSingleTodoDeletionListener() {
   todos.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-trash-can")) {
       const currentTodo = e.target.parentElement.parentElement;
@@ -17,4 +17,4 @@ function deleteSingleTodoTrigger() {
   });
 }
 
-export { deleteSingleTodoTrigger };
+export { setSingleTodoDeletionListener };

@@ -4,7 +4,7 @@ import { initializeTodos } from "./initializeTodos.js";
 import { displayTodos } from "./displayTodos.js";
 import { demoTodo } from "./demoTodo.js";
 import { handleAddTodo } from "./handleAddTodo.js";
-import { deleteSingleTodoTrigger } from "./deleteSingleTodoTrigger.js";
+import { setSingleTodoDeletionListener } from "./setSingleTodoDeletionListener.js";
 import { setCompletedTodosDeletionListener } from "./setCompletedTodosDeletionListener.js";
 
 const todos = document.createElement("ul");
@@ -14,7 +14,7 @@ let tasks = storage.get("tasks") ?? demoTodo;
 displayTodos();
 handleAddTodo();
 initializeTodos();
-deleteSingleTodoTrigger();
+setSingleTodoDeletionListener();
 setCompletedTodosDeletionListener();
 setActiveTab();
 
