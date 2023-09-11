@@ -3,19 +3,19 @@ import { setActiveTab } from "./tabSwitch.js";
 import { initializeTodos } from "./initializeTodos.js";
 import { displayTodos } from "./displayTodos.js";
 import { demoTodo } from "./demoTodo.js";
-import { createTodo } from "./createTodo.js";
+import { handleAddTodo } from "./handleAddTodo.js";
 import { deleteSingleTodoTrigger } from "./deleteSingleTodoTrigger.js";
-import { deleteCompletedTodosTrigger } from "./deleteCompletedTodosTrigger.js";
+import { setCompletedTodosDeletionListener } from "./setCompletedTodosDeletionListener.js";
 
 const todos = document.createElement("ul");
 todos.className = "todo-ul";
 let tasks = storage.get("tasks") ?? demoTodo;
 
 displayTodos();
-createTodo();
+handleAddTodo();
 initializeTodos();
 deleteSingleTodoTrigger();
-deleteCompletedTodosTrigger();
+setCompletedTodosDeletionListener();
 setActiveTab();
 
 export { tasks, todos };
