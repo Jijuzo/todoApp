@@ -1,9 +1,9 @@
 import { tasks } from "./todoapp.js";
 import { storage } from "./storage.js";
-import { todosReassignment } from "./todosReassignment.js";
+import { reassignTodos } from "./reassignTodos.js";
 
 function initializeTodos() {
-  const allCheckBoxes = todosReassignment()[1];
+  const allCheckBoxes = reassignTodos()[1];
   allCheckBoxes.forEach((checkBox) => {
     const currentTodo = checkBox.closest(".todo-ul-item");
     const currentTodoId = Number(currentTodo.id);
@@ -21,9 +21,7 @@ function initializeTodos() {
 
     checkBox.addEventListener("click", () => {
       const currentTodoId = Number(checkBox.closest(".todo-ul-item").id);
-      checkBox.checked
-        ? (label.style.textDecoration = "line-through")
-        : (label.style.textDecoration = "none");
+      label.style.textDecoration = checkBox.checked ? "line-through" : "none";
 
       tasks.forEach((task) => {
         if (task.id === currentTodoId) {

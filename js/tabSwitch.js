@@ -1,7 +1,7 @@
 import { tasks } from "./todoapp.js";
 import { initializeTodos } from "./initializeTodos.js";
-import { todosReassignment } from "./todosReassignment.js";
-import { deleteCompletedButton } from "./deleteCompletedTodosTrigger.js";
+import { reassignTodos } from "./reassignTodos.js";
+import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
 
 const showAll = document.querySelector("#all-button");
 const showActive = document.querySelector("#active-button");
@@ -37,7 +37,7 @@ function updateTodoDisplay(todo, displayValue) {
 
 function showAllTodos() {
   toggleTodosVisibility("hidden", "none", "flex");
-  const todos = todosReassignment()[0];
+  const todos = reassignTodos()[0];
   todos.forEach((todo) => {
     updateTodoDisplay(todo, "block");
   });
@@ -45,7 +45,7 @@ function showAllTodos() {
 
 function showActiveTodos() {
   toggleTodosVisibility("hidden", "none", "flex");
-  const todos = todosReassignment()[0];
+  const todos = reassignTodos()[0];
   todos.forEach((todo) => {
     const currentTodoId = Number(todo.id);
     tasks.forEach((task) => {
@@ -59,7 +59,7 @@ function showActiveTodos() {
 function showCompletedTodos() {
   toggleTodosVisibility("visible", "flex", "none");
   initializeTodos();
-  const todos = todosReassignment()[0];
+  const todos = reassignTodos()[0];
   todos.forEach((todo) => {
     const currentTodoId = Number(todo.id);
     tasks.forEach((task) => {
