@@ -1,12 +1,13 @@
 import { storage } from "./storage.js";
 import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
+import { initializeTodos } from "./initializeTodos.js";
 
-// **Creating and adding todo**
-function createTodo() {
+function handleAddTodo() {
   const input = document.querySelector(".task-input");
-  const addButton = document.querySelector(".add-button");
-  addButton.addEventListener("click", () => {
+  const form = document.querySelector(".task-adding");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
     if (input.value) {
       const randomID = Math.random();
       const userInput = {
@@ -20,8 +21,9 @@ function createTodo() {
 
       addTodo(userInput);
       input.value = "";
+      initializeTodos();
     }
   });
 }
 
-export { createTodo };
+export { handleAddTodo };
