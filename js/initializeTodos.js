@@ -2,6 +2,9 @@ import { tasks } from "./todoapp.js";
 import { storage } from "./storage.js";
 import { reassignTodos } from "./reassignTodos.js";
 
+const activeTab = document.querySelector("#active-button");
+const completedTab = document.querySelector("#completed-button");
+
 function initializeTodos() {
   const allCheckBoxes = reassignTodos()[1];
   allCheckBoxes.forEach((checkBox) => {
@@ -20,6 +23,17 @@ function initializeTodos() {
     });
 
     checkBox.addEventListener("click", () => {
+      const isActiveTab = activeTab.parentElement.classList.contains("active");
+      const isCompletedTab =
+        completedTab.parentElement.classList.contains("active");
+
+      // Set the style based on the current tab's status
+      label.parentElement.style.display =
+        (isActiveTab && !checkBox.checked) ||
+        (isCompletedTab && checkBox.checked)
+          ? "block"
+          : "none";
+
       const currentTodoId = Number(checkBox.closest(".todo-ul-item").id);
       label.style.textDecoration = checkBox.checked ? "line-through" : "none";
 
@@ -28,6 +42,7 @@ function initializeTodos() {
           task.completed = checkBox.checked;
         }
       });
+
       storage.set("tasks", tasks);
     });
   });
