@@ -27,12 +27,11 @@ function initializeTodos() {
       const isCompletedTab =
         completedTab.parentElement.classList.contains("active");
 
-      // Set the style based on the current tab's status
-      label.parentElement.style.display =
+      const shouldDisplay =
         (isActiveTab && !checkBox.checked) ||
-        (isCompletedTab && checkBox.checked)
-          ? "block"
-          : "none";
+        (isCompletedTab && checkBox.checked) ||
+        (!isActiveTab && !isCompletedTab);
+      label.parentElement.style.display = shouldDisplay ? "block" : "none";
 
       const currentTodoId = Number(checkBox.closest(".todo-ul-item").id);
       label.style.textDecoration = checkBox.checked ? "line-through" : "none";
