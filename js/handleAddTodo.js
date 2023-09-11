@@ -21,6 +21,7 @@ function handleAddTodo() {
 
       addTodo(userInput);
       input.value = "";
+
       initializeTodos();
     }
   });
