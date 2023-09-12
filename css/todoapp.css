@@ -41,6 +41,7 @@
 }
 
 .tab {
+  height: 100%;
   font-family: var(--font-family-default);
   font-weight: var(--font-weight-semi-bold);
   font-size: var(--font-size-default);
