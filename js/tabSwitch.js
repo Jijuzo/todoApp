@@ -8,7 +8,7 @@ const showActive = document.querySelector("#active-button");
 const showCompleted = document.querySelector("#completed-button");
 const taskAddButton = document.querySelector(".task-adding");
 
-function setActiveTab() {
+function setActiveTabListener() {
   const tabs = document.querySelectorAll(".nav-section");
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -74,4 +74,4 @@ showAll.addEventListener("click", showAllTodos);
 showActive.addEventListener("click", showActiveTodos);
 showCompleted.addEventListener("click", showCompletedTodos);
 
-export { setActiveTab };
+export { setActiveTabListener };

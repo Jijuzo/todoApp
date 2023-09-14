@@ -12,13 +12,13 @@ function initializeTodos() {
     const currentTodoId = Number(currentTodo.id);
     const label = currentTodo.firstElementChild;
     tasks.forEach((task) => {
-      if (task.id === currentTodoId) {
-        if (task.completed) {
-          checkBox.checked = true;
-          label.style.textDecoration = "line-through";
-        } else {
-          checkBox.checked = false;
-        }
+      if (task.id !== currentTodoId) return;
+
+      if (task.completed) {
+        checkBox.checked = true;
+        label.style.textDecoration = "line-through";
+      } else {
+        checkBox.checked = false;
       }
     });
 

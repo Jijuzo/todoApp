@@ -1,9 +1,9 @@
 import { storage } from "./storage.js";
-import { setActiveTab } from "./tabSwitch.js";
+import { setActiveTabListener } from "./tabSwitch.js";
 import { initializeTodos } from "./initializeTodos.js";
 import { displayTodos } from "./displayTodos.js";
 import { demoTodo } from "./demoTodo.js";
-import { handleAddTodo } from "./handleAddTodo.js";
+import { setTodoCreationListener } from "./setTodoCreationListener.js";
 import { setSingleTodoDeletionListener } from "./setSingleTodoDeletionListener.js";
 import { setCompletedTodosDeletionListener } from "./setCompletedTodosDeletionListener.js";
 
@@ -12,10 +12,10 @@ todos.className = "todo-ul";
 let tasks = storage.get("tasks") ?? demoTodo;
 
 displayTodos();
-handleAddTodo();
+setTodoCreationListener();
 initializeTodos();
 setSingleTodoDeletionListener();
 setCompletedTodosDeletionListener();
-setActiveTab();
+setActiveTabListener();
 
 export { tasks, todos };

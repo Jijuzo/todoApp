@@ -3,7 +3,7 @@ import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 import { initializeTodos } from "./initializeTodos.js";
 
-function handleAddTodo() {
+function setTodoCreationListener() {
   const input = document.querySelector(".task-input");
   const form = document.querySelector(".task-adding");
   form.addEventListener("submit", (e) => {
@@ -27,4 +27,4 @@ function handleAddTodo() {
   });
 }
 
-export { handleAddTodo };
+export { setTodoCreationListener };
