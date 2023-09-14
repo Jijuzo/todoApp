@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/todoapp.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <script src="https://kit.fontawesome.com/c1030fbb40.js" crossorigin="anonymous"></script>
+  <title>TodoApp</title>
+</head>
+
+<body>
+  <main class="page">
+    <header>
+      <h1 class="header-content">#todo</h1>
+    </header>
+
+    <nav>
+      <ul class="tab-links">
+        <li class="nav-section active">
+          <button id="all-button" class="tab">All</button>
+        </li>
+        <li class="nav-section">
+          <button id="active-button" class="tab">Active</button>
+        </li>
+        <li class="nav-section">
+          <button id="completed-button" class="tab">Completed</button>
+        </li>
+      </ul>
+    </nav>
+
+    <form class="task-adding" method="submit">
+      <input class="task-input" type="text" placeholder="add your task">
+      <button class="add-button">Add</button>
+    </form>
+
+    <div id="tab1" class="tab-content">
+    </div>
+
+    <button class="delete-completed">
+      <i class="fa-solid fa-trash-can delete-completed-content"> delete all</i>
+    </button>
+
+
+  </main>
+  <footer>
+    <p>Created by <strong><a class="link" href="https://github.com/Jijuzo">Jijuzo</a></strong> -
+      devChallenges.io
+    </p>
+  </footer>
+  <script type="module" src="../js/todoapp.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,176 @@
+:root {
+  --font-family-default: "Montserrat";
+  --font-size-default: 14px;
+  --font-weight-default: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --color-red: #eb5757;
+  --color-light-red: #f16a6a;
+  --color-blue: #2f80ed;
+  --color-light-blue: #679bdf;
+  --color-dark-gray: #828282;
+  --color-gray: #b9bdcf;
+  --color-light-gray: #bdbdbd;
+  --color-white: #ffffff;
+  --color-black: #333333;
+}
+
+.page {
+  width: 500px;
+  margin: auto;
+  position: relative;
+}
+
+.header-content {
+  font-family: "Raleway";
+  font-weight: var(--font-weight-bold);
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  letter-spacing: -0.045em;
+  color: var(--color-black);
+}
+
+.tab-links {
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  margin: 30px 0px 15px 0px;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.tab {
+  height: 100%;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-size-default);
+  border: none;
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: var(--color-black);
+  background-color: var(--color-white);
+}
+
+.active {
+  border-bottom: 2px solid var(--color-blue);
+}
+
+.task-adding {
+  height: 50px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-input {
+  flex-basis: 70%;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.task-input::placeholder {
+  font-family: var(--font-family-default);
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  line-height: 17px;
+  color: var(--color-dark-gray);
+}
+
+.add-button {
+  flex-basis: 20%;
+  border: 1px solid var(--color-blue);
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--color-white);
+  background: var(--color-blue);
+}
+
+.add-button:hover {
+  background: var(--color-light-blue);
+}
+
+.todo-ul {
+  margin: auto;
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.completed-trash {
+  color: var(--color-light-gray);
+  background-color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  visibility: hidden;
+  right: 0px;
+}
+
+.todo-ul-item {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-default);
+  font-size: 18px;
+  line-height: 22px;
+  position: relative;
+}
+
+.todo-ul-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.task-label {
+  cursor: pointer;
+}
+
+.delete-completed {
+  width: 120px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  border-radius: 4px;
+  border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-red);
+  cursor: pointer;
+  display: none;
+  margin-top: 15px;
+}
+
+.delete-completed:hover {
+  background-color: var(--color-light-red);
+}
+
+.delete-completed-content {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-semi-bold);
+  font-size: 12px;
+  display: inline-block;
+  color: var(--color-white);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  font-size: var(--font-size-default);
+  font-weight: var(--font-weight-default);
+  text-align: center;
+  color: var(--color-gray);
+  margin-bottom: 25px;
+}
+
+.link {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray);
+}
+
+@media (max-width: 500px) {
+  .page {
+    width: 300px;
+  }
+}
