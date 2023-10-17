@@ -6,7 +6,8 @@ function setSingleTodoDeletionListener() {
   todos.addEventListener("click", (e) => {
     const targetTodo = e.target as HTMLElement;
     if (targetTodo.classList.contains("fa-trash-can")) {
-      const currentTodo = targetTodo.parentElement!.parentElement;
+      const currentTodo = (targetTodo.parentElement as HTMLElement)
+        .parentElement;
       if (currentTodo) {
         todos.removeChild(currentTodo);
 
