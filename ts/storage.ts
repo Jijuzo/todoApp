@@ -1,18 +1,15 @@
-import { TypeTodo } from "./demoTodo.js";
+import { Todo } from "./types.js";
 
 const storage = {
   get: function (key: string) {
     const keyItem = localStorage.getItem(key);
     if (keyItem) {
-      let value: string = JSON.parse(keyItem);
+      let value: Todo[] = JSON.parse(keyItem);
       return value;
     }
   },
 
-  set: function (key: string, value: string | TypeTodo) {
-    if (typeof value === "object") {
-      value = JSON.stringify(value);
-    }
+  set: function (key: string, value: string) {
     localStorage.setItem(key, value);
   },
 };
