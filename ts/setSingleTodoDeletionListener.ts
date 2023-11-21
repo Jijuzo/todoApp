@@ -1,6 +1,5 @@
 import { storage } from "./storage.js";
 import { todos, tasks } from "./todoapp.js";
-import { TypeTodo } from "./demoTodo.js";
 
 function setSingleTodoDeletionListener() {
   todos.addEventListener("click", (e) => {
@@ -11,21 +10,13 @@ function setSingleTodoDeletionListener() {
       if (currentTodo) {
         todos.removeChild(currentTodo);
 
-        if (isTypeTodo(tasks)) {
-          const todoIndex = tasks.findIndex(
-            (task) => task.id === Number(currentTodo.id)
-          );
+        const todoIndex = tasks.findIndex((task) => task.id === currentTodo.id);
 
-          tasks.splice(todoIndex, 1);
-          storage.set("tasks", tasks);
-        }
+        tasks.splice(todoIndex, 1);
+        storage.set("tasks", JSON.stringify(tasks));
       }
     }
   });
 }
 
-function isTypeTodo(value: string | TypeTodo): value is TypeTodo {
-  return value !== undefined;
-}
-
-export { setSingleTodoDeletionListener, isTypeTodo };
+export { setSingleTodoDeletionListener };
