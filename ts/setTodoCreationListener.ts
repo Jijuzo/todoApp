@@ -2,7 +2,6 @@ import { storage } from "./storage.js";
 import { addTodo } from "./addTodo.js";
 import { tasks } from "./todoapp.js";
 import { initializeTodos } from "./initializeTodos.js";
-import { isTypeTodo } from "./setSingleTodoDeletionListener.js";
 
 function setTodoCreationListener() {
   const input = document.querySelector(".task-input") as HTMLInputElement;
@@ -10,22 +9,20 @@ function setTodoCreationListener() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (input.value) {
-      const randomID = Math.random();
+      const randomID = String(Math.random());
       const userInput = {
         name: input.value,
         id: randomID,
         completed: false,
       };
 
-      if (isTypeTodo(tasks)) {
-        tasks.push(userInput);
-        storage.set("tasks", tasks);
+      tasks.push(userInput);
+      storage.set("tasks", JSON.stringify(tasks));
 
-        addTodo(userInput);
-        input.value = "";
+      addTodo(userInput);
+      input.value = "";
 
-        initializeTodos();
-      }
+      initializeTodos();
     }
   });
 }
