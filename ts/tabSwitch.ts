@@ -2,7 +2,6 @@ import { tasks } from "./todoapp.js";
 import { initializeTodos } from "./initializeTodos.js";
 import { reassignTodos } from "./reassignTodos.js";
 import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
-import { isTypeTodo } from "./setSingleTodoDeletionListener.js";
 
 const showAll = document.querySelector("#all-button") as HTMLElement;
 const showActive = document.querySelector("#active-button") as HTMLElement;
@@ -54,14 +53,12 @@ function showActiveTodos() {
   toggleTodosVisibility("hidden", "none", "flex");
   const todos = reassignTodos()[0] as NodeListOf<HTMLElement>;
   todos.forEach((todo) => {
-    const currentTodoId = Number(todo.id);
-    if (isTypeTodo(tasks)) {
-      tasks.forEach((task) => {
-        if (currentTodoId === task.id) {
-          updateTodoDisplay(todo, task.completed ? "none" : "block");
-        }
-      });
-    }
+    const currentTodoId = todo.id;
+    tasks.forEach((task) => {
+      if (currentTodoId === task.id) {
+        updateTodoDisplay(todo, task.completed ? "none" : "block");
+      }
+    });
   });
 }
 
@@ -70,14 +67,12 @@ function showCompletedTodos() {
   initializeTodos();
   const todos = reassignTodos()[0] as NodeListOf<HTMLElement>;
   todos.forEach((todo) => {
-    const currentTodoId = Number(todo.id);
-    if (isTypeTodo(tasks)) {
-      tasks.forEach((task) => {
-        if (currentTodoId === task.id) {
-          updateTodoDisplay(todo, task.completed ? "block" : "none");
-        }
-      });
-    }
+    const currentTodoId = todo.id;
+    tasks.forEach((task) => {
+      if (currentTodoId === task.id) {
+        updateTodoDisplay(todo, task.completed ? "block" : "none");
+      }
+    });
   });
 }
 
