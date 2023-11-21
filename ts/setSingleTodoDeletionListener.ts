@@ -1,5 +1,6 @@
 import { storage } from "./storage.js";
 import { todos, tasks } from "./todoapp.js";
+import { Todo } from "./types.js";
 
 function setSingleTodoDeletionListener() {
   todos.addEventListener("click", (e) => {
@@ -13,7 +14,7 @@ function setSingleTodoDeletionListener() {
         const todoIndex = tasks.findIndex((task) => task.id === currentTodo.id);
 
         tasks.splice(todoIndex, 1);
-        storage.set("tasks", JSON.stringify(tasks));
+        storage.set<Todo[]>("tasks", tasks);
       }
     }
   });

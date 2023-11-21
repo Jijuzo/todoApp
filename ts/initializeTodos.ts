@@ -1,6 +1,7 @@
 import { tasks } from "./todoapp.js";
 import { storage } from "./storage.js";
 import { reassignTodos } from "./reassignTodos.js";
+import { Todo } from "./types.js";
 
 const activeTab = document.querySelector("#active-button") as HTMLElement;
 const completedTab = document.querySelector("#completed-button") as HTMLElement;
@@ -47,7 +48,7 @@ function initializeTodos() {
         }
       });
 
-      storage.set("tasks", JSON.stringify(tasks));
+      storage.set<Todo[]>("tasks", tasks);
     });
   });
 }

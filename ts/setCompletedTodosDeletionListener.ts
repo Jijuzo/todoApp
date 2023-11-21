@@ -1,6 +1,7 @@
 import { tasks, todos } from "./todoapp.js";
 import { reassignTodos } from "./reassignTodos.js";
 import { storage } from "./storage.js";
+import { Todo } from "./types.js";
 
 export const deleteCompletedButton = document.querySelector(
   ".delete-completed"
@@ -25,6 +26,6 @@ export function setCompletedTodosDeletionListener() {
       }
     }
 
-    storage.set("tasks", JSON.stringify(tasks));
+    storage.set<Todo[]>("tasks", tasks);
   });
 }
