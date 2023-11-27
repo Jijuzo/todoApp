@@ -33,9 +33,9 @@ This Todo app is a basic task management application developed using JavaScript 
 
 ## Usage
 
-1. Firstly, to run project use `npm run start`, click "html", then "todoapp.html".
+1. Firstly, to run development server use `npm run start`, click "html", then "todoapp.html".
 
-2. After every change, use `npm run build` in your terminal for the changes to take effect.
+2. Secondly, use `npm run watch`, so typescript can watch file changes in live mode.
 
 3. Use the Todo app to manage your tasks!
 
