@@ -1,5 +1,3 @@
-import { Todo } from "./types.js";
-
 const storage = {
   get: function <T>(key: string) {
     const keyItem = localStorage.getItem(key);
