@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "tsc",
-    "start": "npx live-server"
+    "start": "live-server",
+    "watch": "tsc --watch"
   },
   "devDependencies": {
     "live-server": "^1.2.2",
