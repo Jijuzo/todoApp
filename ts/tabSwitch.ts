@@ -27,53 +27,50 @@ function toggleTodosVisibility(
   deleteCompletedButtonDisplay: string,
   taskAddButtonDisplay: string
 ) {
-  let trashCans = document.querySelectorAll(
+  const trashCans = document.querySelectorAll(
     ".completed-trash"
   ) as NodeListOf<HTMLElement>;
-  trashCans.forEach((e) => {
-    e.style.visibility = trashCansVisibility;
+  trashCans.forEach((trashCan) => {
+    trashCan.style.visibility = trashCansVisibility;
   });
+
   deleteCompletedButton.style.display = deleteCompletedButtonDisplay;
   taskAddButton.style.display = taskAddButtonDisplay;
 }
 
-function updateTodoDisplay(todo: HTMLElement, displayValue: string) {
-  todo.style.display = displayValue;
+function updateTodoVisibility(
+  todos: NodeListOf<HTMLElement>,
+  displayValue: string,
+  hideValue: string
+) {
+  todos.forEach((todo) => {
+    const currentTodoId = todo.id;
+    tasks.forEach((task) => {
+      if (currentTodoId === task.id) {
+        const finalDisplayValue = task.completed ? hideValue : displayValue;
+        todo.style.display = finalDisplayValue;
+      }
+    });
+  });
 }
 
 function showAllTodos() {
   toggleTodosVisibility("hidden", "none", "flex");
   const todos = reassignTodos()[0] as NodeListOf<HTMLElement>;
-  todos.forEach((todo) => {
-    updateTodoDisplay(todo, "block");
-  });
+  updateTodoVisibility(todos, "none", "flex");
 }
 
 function showActiveTodos() {
   toggleTodosVisibility("hidden", "none", "flex");
   const todos = reassignTodos()[0] as NodeListOf<HTMLElement>;
-  todos.forEach((todo) => {
-    const currentTodoId = todo.id;
-    tasks.forEach((task) => {
-      if (currentTodoId === task.id) {
-        updateTodoDisplay(todo, task.completed ? "none" : "block");
-      }
-    });
-  });
+  updateTodoVisibility(todos, "none", "block");
 }
 
 function showCompletedTodos() {
   toggleTodosVisibility("visible", "flex", "none");
   initializeTodos();
   const todos = reassignTodos()[0] as NodeListOf<HTMLElement>;
-  todos.forEach((todo) => {
-    const currentTodoId = todo.id;
-    tasks.forEach((task) => {
-      if (currentTodoId === task.id) {
-        updateTodoDisplay(todo, task.completed ? "block" : "none");
-      }
-    });
-  });
+  updateTodoVisibility(todos, "block", "none");
 }
 
 showAll.addEventListener("click", showAllTodos);
