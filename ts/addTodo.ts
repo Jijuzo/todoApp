@@ -2,7 +2,7 @@ import { todos } from "./todoapp.js";
 import { Todo } from "./types.js";
 
 function addTodo(todo: Todo) {
-  const todosDiv = document.querySelector("#tab1");
+  const todosDiv = document.querySelector("#tab1") as HTMLElement;
   const newTodo = document.createElement("li");
   newTodo.className = "todo-ul-item";
   newTodo.id = todo.id;
@@ -15,7 +15,7 @@ function addTodo(todo: Todo) {
             </button>
     `;
   todos.appendChild(newTodo);
-  todosDiv?.appendChild(todos);
+  todosDiv.appendChild(todos);
 }
 
 export { addTodo };
