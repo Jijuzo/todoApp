@@ -9,7 +9,7 @@ function setTodoCreationListener() {
   const form = document.querySelector(".task-adding") as HTMLElement;
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (input.value) {
+    if (input.value.trim() !== "") {
       const randomID = String(Math.random());
       const userInput = {
         name: input.value,
@@ -24,6 +24,8 @@ function setTodoCreationListener() {
       input.value = "";
 
       initializeTodos();
+    } else {
+      input.value = "";
     }
   });
 }
