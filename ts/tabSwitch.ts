@@ -1,61 +1,81 @@
-import { tasks } from "./todoapp.js";
-import { reassignTodos } from "./reassignTodos.js";
 import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
+import { todos } from "./todoapp.js";
 
 const taskAddButton = document.querySelector(".task-adding") as HTMLElement;
+const showAll = document.querySelector("#all-button") as HTMLElement;
+const showActive = document.querySelector("#active-button") as HTMLElement;
+const showCompleted = document.querySelector(
+  "#completed-button"
+) as HTMLElement;
+
+const toggleTabs = (tab: Element) => {
+  const previousActiveTab = document.querySelector(".active") as HTMLElement;
+  previousActiveTab.classList.remove("active");
+  tab.classList.add("active");
+};
 
 function setActiveTabListener() {
   const tabs = document.querySelectorAll(".tab");
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      tabs.forEach((tab) => {
-        tab.classList.remove("active");
-      });
-      tab.classList.add("active");
-      toggleTodosVisibility(tab.id);
+      const isAllOrActiveTab =
+        tab.id === "all-button" || tab.id === "active-button";
+      toggleTabs(tab);
+      toggleActions(isAllOrActiveTab);
     });
   });
 }
 
-function toggleTrashCansVisibility(isAllOrActiveTab: boolean) {
+const toggleActions = (isAllOrActiveTab: boolean) => {
   const trashCans = document.querySelectorAll(
     ".completed-trash"
   ) as NodeListOf<HTMLElement>;
   trashCans.forEach((trashCan) => {
-    trashCan.style.visibility = isAllOrActiveTab ? "hidden" : "visible";
+    trashCan.style.display = isAllOrActiveTab ? "none" : "inline";
   });
-}
-
-function toggleButtonsVisibility(isAllOrActiveTab: boolean) {
   deleteCompletedButton.style.display = isAllOrActiveTab ? "none" : "flex";
-  taskAddButton.style.display = isAllOrActiveTab ? "flex" : "none";
-}
+  taskAddButton.style.display = !isAllOrActiveTab ? "none" : "flex";
+};
 
-function filterAndDisplayTodos(activeTab: string) {
-  const [todos] = reassignTodos() as [NodeListOf<HTMLElement>];
-  todos.forEach((todo) => {
-    const currentTodoId = todo.id;
-    const matchingTask = tasks.find((task) => task.id === currentTodoId);
-    const shouldDisplay =
-      activeTab === "all-button" || !matchingTask
-        ? "block"
-        : activeTab === "active-button"
-        ? !matchingTask.completed
-          ? "block"
-          : "none"
-        : matchingTask.completed
-        ? "block"
-        : "none";
-    todo.style.display = shouldDisplay;
+const getTodoUIs = () => {
+  const todos = document.querySelectorAll(
+    ".todo-ul-item"
+  ) as NodeListOf<HTMLElement>;
+
+  return [...todos];
+};
+
+const getCompletedTodoIds = () => {
+  return todos.filter((todo) => todo.completed).map((todo) => todo.id);
+};
+
+const toggleTodo = (todoUI: HTMLElement, status: boolean) => {
+  todoUI.style.display = status ? "block" : "none";
+};
+
+const showAllTodos = () => {
+  getTodoUIs().forEach((todo) => (todo.style.display = "block"));
+};
+
+const showActiveTodos = () => {
+  const completedTodoIds = getCompletedTodoIds();
+
+  getTodoUIs().forEach((todo) => {
+    const isActive = !completedTodoIds.includes(todo.id);
+    toggleTodo(todo, isActive);
   });
-}
+};
 
-function toggleTodosVisibility(activeTab: string) {
-  const isAllOrActiveTab =
-    activeTab === "all-button" || activeTab === "active-button";
-  toggleTrashCansVisibility(isAllOrActiveTab);
-  toggleButtonsVisibility(isAllOrActiveTab);
-  filterAndDisplayTodos(activeTab);
-}
+const showCompletedTodos = () => {
+  const completedTodoIds = getCompletedTodoIds();
 
+  getTodoUIs().forEach((todo) => {
+    const isCompleted = completedTodoIds.includes(todo.id);
+    toggleTodo(todo, isCompleted);
+  });
+};
+
+showAll.addEventListener("click", showAllTodos);
+showActive.addEventListener("click", showActiveTodos);
+showCompleted.addEventListener("click", showCompletedTodos);
 export { setActiveTabListener };
