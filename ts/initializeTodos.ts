@@ -24,12 +24,8 @@ function initializeTodos() {
     });
 
     checkBox.addEventListener("click", () => {
-      const isActiveTab = (
-        activeTab.parentElement as HTMLElement
-      ).classList.contains("active");
-      const isCompletedTab = (
-        completedTab.parentElement as HTMLElement
-      ).classList.contains("active");
+      const isActiveTab = activeTab.classList.contains("active");
+      const isCompletedTab = completedTab.classList.contains("active");
 
       const shouldDisplay =
         (isActiveTab && !checkBox.checked) ||
