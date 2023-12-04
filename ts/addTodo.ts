@@ -1,4 +1,4 @@
-import { todos } from "./todoapp.js";
+import { todosUl } from "./todoapp.js";
 import { Todo } from "./types.js";
 
 function addTodo(todo: Todo) {
@@ -14,8 +14,8 @@ function addTodo(todo: Todo) {
             <i class="fa-solid fa-trash-can"></i>
             </button>
     `;
-  todos.appendChild(newTodo);
-  todosDiv.appendChild(todos);
+  todosUl.appendChild(newTodo);
+  todosDiv.appendChild(todosUl);
 }
 
 export { addTodo };

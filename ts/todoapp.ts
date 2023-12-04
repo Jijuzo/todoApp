@@ -8,9 +8,9 @@ import { setSingleTodoDeletionListener } from "./setSingleTodoDeletionListener.j
 import { setCompletedTodosDeletionListener } from "./setCompletedTodosDeletionListener.js";
 import { Todo } from "./types.js";
 
-const todos = document.createElement("ul");
-todos.className = "todo-ul";
-let tasks = storage.get<Todo[]>("tasks") ?? demoTodos;
+const todosUl = document.createElement("ul");
+todosUl.className = "todo-ul";
+let todos = storage.get<Todo[]>("todos") ?? demoTodos;
 
 displayTodos();
 setTodoCreationListener();
@@ -19,4 +19,4 @@ setSingleTodoDeletionListener();
 setCompletedTodosDeletionListener();
 setActiveTabListener();
 
-export { tasks, todos };
+export { todos, todosUl };
