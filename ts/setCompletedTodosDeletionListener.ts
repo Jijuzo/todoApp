@@ -1,38 +1,21 @@
-import { todos, todosUl } from "./todoapp.js";
+import { modifyStorageTodos, todos, todosUl } from "./todoapp.js";
 import { storage } from "./storage.js";
 import { Todo } from "./types.js";
 
-export const deleteCompletedButton = document.querySelector(
+const deleteCompletedButton = document.querySelector(
   ".delete-completed"
 ) as HTMLElement;
 
-export function setCompletedTodosDeletionListener() {
+function setCompletedTodosDeletionListener() {
   deleteCompletedButton.addEventListener("click", () => {
-    const allTodos = getTodoUIs();
-    allTodos.forEach((todoUI) => {
-      const currentTodoId = todoUI.id;
-
-      todos.forEach((todo) => {
-        if (todo.id === currentTodoId && todo.completed) {
-          todosUl.removeChild(todoUI);
-        }
-      });
+    const activeTodos: Todo[] = [];
+    todos.forEach((todo) => {
+      const todoUI = document.getElementById(`${todo.id}`) as HTMLElement;
+      todo.completed ? todosUl.removeChild(todoUI) : activeTodos.push(todo);
     });
-
-    for (let i = todos.length - 1; i >= 0; i--) {
-      if (todos[i].completed) {
-        todos.splice(i, 1);
-      }
-    }
-
+    modifyStorageTodos(activeTodos);
     storage.set<Todo[]>("todos", todos);
   });
 }
 
-const getTodoUIs = () => {
-  const todos = document.querySelectorAll(
-    ".todo-ul-item"
-  ) as NodeListOf<HTMLElement>;
-
-  return [...todos];
-};
+export { deleteCompletedButton, setCompletedTodosDeletionListener };

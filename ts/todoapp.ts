@@ -12,6 +12,10 @@ const todosUl = document.createElement("ul");
 todosUl.className = "todo-ul";
 let todos = storage.get<Todo[]>("todos") ?? demoTodos;
 
+const modifyStorageTodos = (newArray: Todo[]): void => {
+  todos = newArray;
+};
+
 displayTodos();
 setTodoCreationListener();
 initializeTodos();
@@ -19,4 +23,4 @@ setSingleTodoDeletionListener();
 setCompletedTodosDeletionListener();
 setActiveTabListener();
 
-export { todos, todosUl };
+export { todos, todosUl, modifyStorageTodos };
