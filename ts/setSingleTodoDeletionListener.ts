@@ -1,6 +1,7 @@
 import { storage } from "./storage.js";
-import { todosUl, todos } from "./todoapp.js";
+import { todos } from "./storage-todos.js";
 import { Todo } from "./types.js";
+import { todosUl } from "./addTodo.js";
 
 function setSingleTodoDeletionListener() {
   todosUl.addEventListener("click", (e) => {

@@ -1,5 +1,5 @@
 import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
-import { todos } from "./todoapp.js";
+import { todos } from "./storage-todos.js";
 
 const taskAddButton = document.querySelector(".task-adding") as HTMLElement;
 const showAll = document.querySelector("#all-button") as HTMLElement;
