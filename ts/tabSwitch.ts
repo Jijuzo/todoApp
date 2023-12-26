@@ -1,5 +1,5 @@
 import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
-import { todos } from "./storage-todos.js";
+import { todoModel } from "./todoModel.js";
 
 const taskAddButton = document.querySelector(".task-adding") as HTMLElement;
 const showAll = document.querySelector("#all-button") as HTMLElement;
@@ -46,7 +46,9 @@ const getTodoUIs = () => {
 };
 
 const getCompletedTodoIds = () => {
-  return todos.filter((todo) => todo.completed).map((todo) => todo.id);
+  return todoModel.items
+    .filter((todo) => todo.completed)
+    .map((todo) => todo.id);
 };
 
 const toggleTodo = (todoUI: HTMLElement, status: boolean) => {

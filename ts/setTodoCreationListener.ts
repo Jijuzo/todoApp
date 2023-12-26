@@ -1,8 +1,6 @@
-import { storage } from "./storage.js";
 import { addTodo } from "./addTodo.js";
-import { todos } from "./storage-todos.js";
+import { todoModel } from "./todoModel.js";
 import { initializeTodos } from "./initializeTodos.js";
-import { Todo } from "./types.js";
 
 function setTodoCreationListener() {
   const input = document.querySelector(".task-input") as HTMLInputElement;
@@ -17,8 +15,7 @@ function setTodoCreationListener() {
         completed: false,
       };
 
-      todos.push(userInput);
-      storage.set<Todo[]>("todos", todos);
+      todoModel.items = [...todoModel.items, userInput];
 
       addTodo(userInput);
       input.value = "";

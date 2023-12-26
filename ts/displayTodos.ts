@@ -1,8 +1,8 @@
 import { addTodo } from "./addTodo.js";
-import { todos } from "./storage-todos.js";
+import { todoModel } from "./todoModel.js";
 
 function displayTodos() {
-  todos.forEach((todo) => {
+  todoModel.items.forEach((todo) => {
     addTodo(todo);
   });
 }

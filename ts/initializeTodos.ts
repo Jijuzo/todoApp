@@ -1,6 +1,4 @@
-import { todos } from "./storage-todos.js";
-import { storage } from "./storage.js";
-import { Todo } from "./types.js";
+import { todoModel } from "./todoModel.js";
 
 const activeTab = document.querySelector("#active-button") as HTMLElement;
 const completedTab = document.querySelector("#completed-button") as HTMLElement;
@@ -11,7 +9,7 @@ function initializeTodos() {
     const currentTodo = checkBox.closest(".todo-ul-item") as HTMLElement;
     const currentTodoId = currentTodo.id;
     const label = currentTodo.firstElementChild as HTMLElement;
-    todos.forEach((todo) => {
+    todoModel.items.forEach((todo) => {
       if (todo.id !== currentTodoId) return;
       if (todo.completed) {
         checkBox.checked = true;
@@ -35,13 +33,11 @@ function initializeTodos() {
       const currentTodoId = currentTodo.id;
       label.style.textDecoration = checkBox.checked ? "line-through" : "none";
 
-      todos.forEach((task) => {
-        if (task.id === currentTodoId) {
-          task.completed = checkBox.checked;
-        }
-      });
-
-      storage.set<Todo[]>("todos", todos);
+      todoModel.items = todoModel.items.map((todo) =>
+        todo.id === currentTodoId
+          ? { ...todo, completed: checkBox.checked }
+          : todo
+      );
     });
   });
 }
