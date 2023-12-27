@@ -17,4 +17,4 @@ function setCompletedTodosDeletionListener() {
   });
 }
 
-export { deleteCompletedButton, setCompletedTodosDeletionListener };
+export { setCompletedTodosDeletionListener };

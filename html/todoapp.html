@@ -32,19 +32,16 @@
       </ul>
     </nav>
 
-    <form class="task-adding" method="submit">
-      <input class="task-input" type="text" placeholder="add your task">
-      <button class="add-button">Add</button>
-    </form>
-
-    <div id="tab1" class="tab-content">
+    <div class="tab-content">
+      <form class="add-todo" method="submit">
+        <input class="task-input" type="text" placeholder="add your task">
+        <button class="add-button">Add</button>
+      </form>
       <ul class="todo-ul"></ul>
+      <button class="delete-completed hidden">
+        <i class="fa-solid fa-trash-can delete-completed-content"> delete all</i>
+      </button>
     </div>
-
-    <button class="delete-completed">
-      <i class="fa-solid fa-trash-can delete-completed-content"> delete all</i>
-    </button>
-
 
   </main>
   <footer>

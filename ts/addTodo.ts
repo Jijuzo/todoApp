@@ -8,7 +8,7 @@ function addTodo(todo: Todo) {
   newTodo.className = "todo-ul-item";
   newTodo.id = todo.id;
   newTodo.innerHTML = `
-            <label class="task-label">
+            <label class="todo-label">
             <input type="checkbox" class="check"> ${todo.name}
             </label>
             <button class="completed-trash">
@@ -17,13 +17,17 @@ function addTodo(todo: Todo) {
     `;
   todosUl.appendChild(newTodo);
 
-  const trashCan = newTodo.querySelector(".completed-trash");
-  setTodoDeletionListener(trashCan as Element);
+  const trashCan = newTodo.querySelector(".completed-trash") as Element;
+  const checkBox = newTodo.querySelector(".check") as HTMLInputElement;
+  setTodoDeletionListener(trashCan, newTodo);
+  setTodoDisplayListener(checkBox, newTodo);
 }
 
-const setTodoDeletionListener = (trashCan: Element) => {
+const setTodoDeletionListener = (
+  trashCan: Element,
+  currentTodo: HTMLLIElement
+) => {
   trashCan.addEventListener("click", () => {
-    const currentTodo = trashCan.closest(".todo-ul-item");
     if (currentTodo) {
       todosUl.removeChild(currentTodo);
 
@@ -31,6 +35,22 @@ const setTodoDeletionListener = (trashCan: Element) => {
         (todo) => todo.id !== currentTodo.id
       );
     }
+  });
+};
+
+const setTodoDisplayListener = (
+  checkBox: HTMLInputElement,
+  currentTodo: HTMLLIElement
+) => {
+  checkBox.addEventListener("click", () => {
+    const currentTodoId = currentTodo.id;
+
+    currentTodo.classList.toggle("completed");
+    todoModel.items = todoModel.items.map((todo) =>
+      todo.id === currentTodoId
+        ? { ...todo, completed: checkBox.checked }
+        : todo
+    );
   });
 };
 

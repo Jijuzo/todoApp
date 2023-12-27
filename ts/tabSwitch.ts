@@ -1,12 +1,9 @@
-import { deleteCompletedButton } from "./setCompletedTodosDeletionListener.js";
-import { todoModel } from "./todoModel.js";
-
-const taskAddButton = document.querySelector(".task-adding") as HTMLElement;
-const showAll = document.querySelector("#all-button") as HTMLElement;
-const showActive = document.querySelector("#active-button") as HTMLElement;
-const showCompleted = document.querySelector(
-  "#completed-button"
+const todosUl = document.querySelector(".todo-ul") as HTMLElement;
+const addTodoForm = document.querySelector(".add-todo") as HTMLElement;
+const deleteCompletedButton = document.querySelector(
+  ".delete-completed"
 ) as HTMLElement;
+const tabs = document.querySelectorAll(".tab");
 
 const toggleTabs = (tab: Element) => {
   const previousActiveTab = document.querySelector(".active") as HTMLElement;
@@ -14,70 +11,26 @@ const toggleTabs = (tab: Element) => {
   tab.classList.add("active");
 };
 
-function setActiveTabListener() {
-  const tabs = document.querySelectorAll(".tab");
+const toggleActions = (tab: Element) => {
+  const isAllOrActiveTab =
+    tab.id === "all-button" || tab.id === "active-button";
+  deleteCompletedButton.classList.toggle("hidden", isAllOrActiveTab);
+  addTodoForm.classList.toggle("hidden", !isAllOrActiveTab);
+};
+
+const toggleUl = (tab: Element) => {
+  const pureTabName = tab.id.replace("-button", "");
+  todosUl.className = `todo-ul ${pureTabName}-todos`;
+};
+
+const setActiveTabListener = () => {
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      const isAllOrActiveTab =
-        tab.id === "all-button" || tab.id === "active-button";
       toggleTabs(tab);
-      toggleActions(isAllOrActiveTab);
+      toggleActions(tab);
+      toggleUl(tab);
     });
   });
-}
-
-const toggleActions = (isAllOrActiveTab: boolean) => {
-  const trashCans = document.querySelectorAll(
-    ".completed-trash"
-  ) as NodeListOf<HTMLElement>;
-  trashCans.forEach((trashCan) => {
-    trashCan.style.display = isAllOrActiveTab ? "none" : "inline";
-  });
-  deleteCompletedButton.style.display = isAllOrActiveTab ? "none" : "flex";
-  taskAddButton.style.display = !isAllOrActiveTab ? "none" : "flex";
 };
 
-const getTodoUIs = () => {
-  const todos = document.querySelectorAll(
-    ".todo-ul-item"
-  ) as NodeListOf<HTMLElement>;
-
-  return [...todos];
-};
-
-const getCompletedTodoIds = () => {
-  return todoModel.items
-    .filter((todo) => todo.completed)
-    .map((todo) => todo.id);
-};
-
-const toggleTodo = (todoUI: HTMLElement, status: boolean) => {
-  todoUI.style.display = status ? "block" : "none";
-};
-
-const showAllTodos = () => {
-  getTodoUIs().forEach((todo) => (todo.style.display = "block"));
-};
-
-const showActiveTodos = () => {
-  const completedTodoIds = getCompletedTodoIds();
-
-  getTodoUIs().forEach((todo) => {
-    const isActive = !completedTodoIds.includes(todo.id);
-    toggleTodo(todo, isActive);
-  });
-};
-
-const showCompletedTodos = () => {
-  const completedTodoIds = getCompletedTodoIds();
-
-  getTodoUIs().forEach((todo) => {
-    const isCompleted = completedTodoIds.includes(todo.id);
-    toggleTodo(todo, isCompleted);
-  });
-};
-
-showAll.addEventListener("click", showAllTodos);
-showActive.addEventListener("click", showActiveTodos);
-showCompleted.addEventListener("click", showCompletedTodos);
 export { setActiveTabListener };
