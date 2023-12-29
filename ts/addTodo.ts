@@ -20,7 +20,7 @@ function addTodo(todo: Todo) {
   const trashCan = newTodo.querySelector(".completed-trash") as Element;
   const checkBox = newTodo.querySelector(".check") as HTMLInputElement;
   setTodoDeletionListener(trashCan, newTodo);
-  setTodoDisplayListener(checkBox, newTodo);
+  setTodoToggleListener(checkBox, newTodo);
 }
 
 const setTodoDeletionListener = (
@@ -38,7 +38,7 @@ const setTodoDeletionListener = (
   });
 };
 
-const setTodoDisplayListener = (
+const setTodoToggleListener = (
   checkBox: HTMLInputElement,
   currentTodo: HTMLLIElement
 ) => {
