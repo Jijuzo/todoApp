@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/todoapp.css">
   <link rel="stylesheet" href="../css/normalize.css">
   <script src="https://kit.fontawesome.com/c1030fbb40.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="/assets/task.png">
   <title>TodoApp</title>
 </head>
 
@@ -19,8 +20,8 @@
 
     <nav>
       <ul class="tab-links">
-        <li class="nav-section active">
-          <button id="all-button" class="tab">All</button>
+        <li class="nav-section">
+          <button id="all-button" class="tab active">All</button>
         </li>
         <li class="nav-section">
           <button id="active-button" class="tab">Active</button>
@@ -31,18 +32,16 @@
       </ul>
     </nav>
 
-    <form class="task-adding" method="submit">
-      <input class="task-input" type="text" placeholder="add your task">
-      <button class="add-button">Add</button>
-    </form>
-
-    <div id="tab1" class="tab-content">
+    <div class="tab-content">
+      <form class="add-todo" method="submit">
+        <input class="task-input" type="text" placeholder="add your task">
+        <button class="add-button">Add</button>
+      </form>
+      <ul class="todo-ul"></ul>
+      <button class="delete-completed hidden">
+        <i class="fa-solid fa-trash-can delete-completed-content"> delete all</i>
+      </button>
     </div>
-
-    <button class="delete-completed">
-      <i class="fa-solid fa-trash-can delete-completed-content"> delete all</i>
-    </button>
-
 
   </main>
   <footer>
@@ -50,7 +49,7 @@
       devChallenges.io
     </p>
   </footer>
-  <script type="module" src="../js/todoapp.js"></script>
+  <script type="module" src="../dist/todoapp.js"></script>
 </body>
 
 

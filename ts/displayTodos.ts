@@ -1,9 +1,9 @@
 import { addTodo } from "./addTodo.js";
-import { tasks } from "./todoapp.js";
+import { todoModel } from "./todoModel.js";
 
 function displayTodos() {
-  tasks.forEach((task) => {
-    addTodo(task);
+  todoModel.items.forEach((todo) => {
+    addTodo(todo);
   });
 }
 

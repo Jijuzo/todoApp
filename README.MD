@@ -27,11 +27,17 @@ This Todo app is a basic task management application developed using JavaScript 
 
 `cd todoApp`
 
+3. Install developer dependencies:
+
+`npm i`
+
 ## Usage
 
-1. To run project open [todoapp.html](html\todoapp.html) in your browser, or if you are using <a href="https://code.visualstudio.com/">Visual Studio Code</a> use <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server </a>extension.
+1. Firstly, to run development server use `npm run start`, click "html", then "todoapp.html".
 
-2. Use the Todo app to manage your tasks!
+2. Secondly, use `npm run watch`, so typescript can watch file changes in live mode.
+
+3. Use the Todo app to manage your tasks!
 
 ## License
 
