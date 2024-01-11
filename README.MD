@@ -1,5 +1,7 @@
 # Todo App
 
+<a href="https://jijuzostodoapp.vercel.app">Live Demo</a>
+
 This Todo app is a basic task management application developed using JavaScript and TypeScript. It provides a clean and intuitive interface for users to add, complete, and delete completed tasks.
 
 ## Table of Contents
